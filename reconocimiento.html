@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <style>
+    body{
+      background-color: antiquewhite;
+    }
+  </style>
+  ññ
+
+  
+<!-- ML5 -->  
+<script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.5/lib/p5.min.js"></script>
+<script>
+  let classifier;
+
+  let img;
+
+  let capa;
+
+  function preload() {
+    classifier = ml5.imageClassifier('MobileNet');
+    img = loadImage("images/animal1.jpg");
+    capa = document.querySelector("#resultado");
+  }
+
+  function setup() {
+    createCanvas(400, 400);
+    classifier.classify(img, gotResult);
+    image(img, 0, 0, width, height);
+  }
+
+  function gotResult(result){
+    console.log(result);
+
+    const confianza = (nf(result[0].confidence, 0, 2) * 100); 
+    capa.innerHTML = result[0].label + " " + confianza + "%";
+  }
+
+</script>
+</body>
+</html>

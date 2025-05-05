@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.5/lib/p5.min.js"></script>
+<script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+
+<script>
+  
+  let handPose
+  let video
+  let hands = []
+
+
+  function preload() {
+    //Cargar el modelo de detección de manos
+    handPose = ml5.handPose()
+  }
+
+  function setup() {
+    createCanvas(640, 480)
+    //background.hide()
+
+
+
+
+
+    video = createCapture(VIDEO);
+    video.size(640,400);
+    video.hide();
+
+    handPose.detectStart(video, gotHands);
+  }
+
+
+
+
+
+  function draw() {
+    //El video captura sera mostrado en el lienzo (canvas)
+    image(video, 0, 0, width, height);
+
+    //Renderizar/pintar/dibujar la ubicación de cada dedo
+    for (let i = 0; i < hands.length; i++){
+      //Mano identificada
+      let hand = hands[i];
+
+      //Identificar los dedos de la mano
+      for (let j = 0; j < hand.keypoints.length; j++){
+        const keypoint = hand.keypoints[j]
+        fill(0, 255, 0) // RGB
+        noStroke()
+        circle(keypoint.x, keypoint.y, 10)
+
+        }
+    }
+  }
+
+
+  
+  function gotHands(results) {
+    hands = results;
+  }
+</script>
+</body>
+</html>

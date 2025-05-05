@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <style>
+    body{
+      background-color: aquamarine;
+    }
+  </style>
+
+<script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.5/lib/p5.min.js"></script>
+
+<script>
+
+  let handPose
+  let video
+  let hands = []
+
+  function preload() {
+    handPose = ml5.handPose()
+  }
+
+  function setup() {
+    createCanvas(640,400);
+    video = createCapture(VIDEO);
+    video.size(width, height);
+  }
+
+  function draw() {
+
+  }
+</script>
+</body>
+</html>
