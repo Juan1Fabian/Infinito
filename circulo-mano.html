@@ -26,10 +26,8 @@
 
   function setup() {
     createCanvas(640, 480)
-
     video = createCapture(VIDEO)
-
-    video.size(640, 480)
+    video.size(width, height)
     video.hide()
 
     handPose.detectStart(video, gotHands)
